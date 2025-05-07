@@ -83,11 +83,11 @@ func (s *IINService) extractDateOfBirth(iin string) (string, error) {
 	var century int
 	switch centurySexDigit {
 	case 1, 2:
-		century = 19
-	case 3, 4:
-		century = 20
-	case 5, 6:
 		century = 18
+	case 3, 4:
+		century = 19
+	case 5, 6:
+		century = 20
 	default:
 		return "", errors.New("")
 	}
