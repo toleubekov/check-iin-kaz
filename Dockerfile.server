@@ -1,0 +1,35 @@
+FROM golang:1.24.2-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server
+
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/server .
+COPY --from=builder /app/schema /app/schema
+
+RUN apk add --no-cache curl && \
+    curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz && \
+    mv migrate /usr/local/bin/migrate && \
+    chmod +x /usr/local/bin/migrate
+
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'echo "Waiting for database to be ready..."' >> /app/entrypoint.sh && \
+    echo 'sleep 5' >> /app/entrypoint.sh && \
+    echo 'migrate -path /app/schema -database "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=${DB_SSLMODE}" up' >> /app/entrypoint.sh && \
+    echo 'echo "Database migrations applied"' >> /app/entrypoint.sh && \
+    echo 'exec /app/server' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
+EXPOSE 8080
+
+ENTRYPOINT ["/app/entrypoint.sh"]
