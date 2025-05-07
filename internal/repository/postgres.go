@@ -5,6 +5,8 @@ import (
 	"github.com/toleubekov/kaspiCheckIIN/internal/model"
 )
 
+/// migrate create -ext sql -dir ./schema -seq init
+
 type PersonRepository struct {
 	db *sqlx.DB
 }
