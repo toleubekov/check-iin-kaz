@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: iin-postgres
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: iin-server
+    depends_on:
+      - postgres
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=qwerty
+      - DB_NAME=postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_SSLMODE=disable
+      - SERVER_PORT=8080
+    ports:
+      - "8080:8080"
+
+  stress-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.stress-test
+    container_name: iin-stress-test
+    depends_on:
+      - server
+    environment:
+      - SERVER_URL=http://server:8080
+      - NUM_GOROUTINES=5
+      - NUM_REQUESTS=20
+
+volumes:
+  postgres-data:
