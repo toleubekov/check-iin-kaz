@@ -1,0 +1,26 @@
+FROM golang:1.24.2-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod ./
+
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o stress-test ./cmd/stress-test
+
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY --from=builder /app/stress-test .
+
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'echo "Waiting for server to be ready..."' >> /app/entrypoint.sh && \
+    echo 'sleep 15' >> /app/entrypoint.sh && \
+    echo 'echo "Starting stress test..."' >> /app/entrypoint.sh && \
+    echo 'exec /app/stress-test' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
+ENTRYPOINT ["/app/entrypoint.sh"]
