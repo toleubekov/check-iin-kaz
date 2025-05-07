@@ -16,7 +16,7 @@ func NewIINService() *IINService {
 func (s *IINService) ValidateIIN(iin string) (bool, string, string, error) {
 
 	if len(iin) != 12 {
-		return false, "", "", errors.New("Длина ИИН должна быть равная 12")
+		return false, "", "", errors.New("длина ИИН должна быть равная 12")
 	}
 
 	for _, c := range iin {
@@ -26,7 +26,7 @@ func (s *IINService) ValidateIIN(iin string) (bool, string, string, error) {
 	}
 
 	if !s.validateChecksum(iin) {
-		return false, "", "", errors.New("Некорреткный иин")
+		return false, "", "", errors.New("некорреткный иин")
 	}
 
 	dateOfBirth, err := s.extractDateOfBirth(iin)
