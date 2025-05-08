@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -44,13 +45,20 @@ func (h *Handler) CheckIIN(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Modify the CreatePerson function in internal/api/handler.go
+
 func (h *Handler) CreatePerson(w http.ResponseWriter, r *http.Request) {
+	log.Println("Received CreatePerson request")
+
 	var person model.Person
 	err := json.NewDecoder(r.Body).Decode(&person)
 	if err != nil {
+		log.Printf("ERROR: Failed to decode request body: %v", err)
 		sendErrorResponse(w, http.StatusBadRequest, "Invalid request format")
 		return
 	}
+
+	log.Printf("Attempting to create person: Name=%s, IIN=%s", person.Name, person.IIN)
 
 	correct, _, _, err := h.iinService.ValidateIIN(person.IIN)
 	if !correct || err != nil {
@@ -58,15 +66,21 @@ func (h *Handler) CreatePerson(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			errorMsg = err.Error()
 		}
+		log.Printf("ERROR: IIN validation failed: %s", errorMsg)
 		sendErrorResponse(w, http.StatusInternalServerError, errorMsg)
 		return
 	}
 
+	log.Printf("IIN validated successfully, proceeding to database insertion")
+
 	err = h.repo.Create(&person)
 	if err != nil {
+		log.Printf("ERROR: Database insertion failed: %v", err)
 		sendErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
+	log.Printf("SUCCESS: Person created in database with IIN: %s", person.IIN)
 
 	response := model.PersonResponse{
 		Success: true,
