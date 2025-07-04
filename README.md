@@ -116,7 +116,7 @@ POST /people/info
 Content-Type: application/json
 
 {
-  "name": "Назарбаев Нурсултан Абишевич",
+  "name": "Мыркымбаев Мыркымбай Мыркымбаевич",
   "iin": "400701111111",
   "phone": "+77771234567"
 }
