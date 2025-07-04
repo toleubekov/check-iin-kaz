@@ -1,4 +1,4 @@
-module github.com/toleubekov/kaspiCheckIIN
+module github.com/toleubekov/check-iin-kaz
 
 go 1.24.2
 
