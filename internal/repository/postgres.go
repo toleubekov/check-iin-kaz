@@ -7,7 +7,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/toleubekov/kaspiCheckIIN/internal/model"
+	"github.com/toleubekov/check-iin-kaz/internal/model"
 )
 
 type PersonRepository struct {

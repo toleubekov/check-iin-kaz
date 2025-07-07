@@ -6,9 +6,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/toleubekov/kaspiCheckIIN/internal/model"
-	"github.com/toleubekov/kaspiCheckIIN/internal/repository"
-	"github.com/toleubekov/kaspiCheckIIN/internal/service"
+	"github.com/toleubekov/check-iin-kaz/internal/model"
+	"github.com/toleubekov/check-iin-kaz/internal/repository"
+	"github.com/toleubekov/check-iin-kaz/internal/service"
 )
 
 type Handler struct {

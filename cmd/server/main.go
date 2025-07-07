@@ -7,9 +7,9 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/toleubekov/kaspiCheckIIN/internal/api"
-	"github.com/toleubekov/kaspiCheckIIN/internal/repository"
-	"github.com/toleubekov/kaspiCheckIIN/internal/service"
+	"github.com/toleubekov/check-iin-kaz/internal/api"
+	"github.com/toleubekov/check-iin-kaz/internal/repository"
+	"github.com/toleubekov/check-iin-kaz/internal/service"
 )
 
 func main() {

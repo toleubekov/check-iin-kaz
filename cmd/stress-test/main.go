@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/toleubekov/kaspiCheckIIN/internal/model"
+	"github.com/toleubekov/check-iin-kaz/internal/model"
 )
 
 type Config struct {
