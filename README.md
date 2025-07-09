@@ -2,6 +2,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/toleubekov/check-iin-kaz)](https://goreportcard.com/report/github.com/toleubekov/check-iin-kaz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.24.2+-blue.svg)](https://golang.org)
+[![pkg.go.dev](https://pkg.go.dev/badge/github.com/toleubekov/check-iin-kaz/iin.svg)](https://pkg.go.dev/github.com/toleubekov/check-iin-kaz/iin)
 
 > Универсальное решение для валидации Индивидуальных Идентификационных Номеров (ИИН) Республики Казахстан. Используйте как **легковесную библиотеку** в вашем коде или как **готовый HTTP сервис**.
 
@@ -442,7 +443,6 @@ go run cmd/stress-test/main.go
 - 🦋 Zero dependencies (в библиотеке)
 
 
-[![pkg.go.dev](https://pkg.go.dev/badge/github.com/toleubekov/check-iin-kaz/iin.svg)](https://pkg.go.dev/github.com/toleubekov/check-iin-kaz/iin)
 
 ## 📄 Лицензия
 
