@@ -17,7 +17,7 @@ func main() {
 		"03123150012",  // Короткий ИИН
 	}
 
-	fmt.Println("=== Примеры использования библиотеки check-iin-kaz ===\n")
+	fmt.Println("=== Примеры использования библиотеки check-iin-kaz ===")
 
 	for i, testIIN := range testIINs {
 		fmt.Printf("--- Пример %d: ИИН %s ---\n", i+1, testIIN)
