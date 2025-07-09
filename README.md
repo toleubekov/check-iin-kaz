@@ -441,6 +441,9 @@ go run cmd/stress-test/main.go
 - 🔐 Environment-based configuration
 - 🦋 Zero dependencies (в библиотеке)
 
+
+[![pkg.go.dev](https://pkg.go.dev/badge/github.com/toleubekov/check-iin-kaz/iin.svg)](https://pkg.go.dev/github.com/toleubekov/check-iin-kaz/iin)
+
 ## 📄 Лицензия
 
 Этот проект лицензирован под [MIT License](LICENSE).
@@ -448,6 +451,8 @@ go run cmd/stress-test/main.go
 ## 👨‍💻 Автор
 
 **Zhandos Toleubekov** - [GitHub](https://github.com/toleubekov)
+
+
 
 ---
 
